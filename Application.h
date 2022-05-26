@@ -17,8 +17,6 @@ public:
     void build_objects_tree();
     // Метод старта приложения
     int start();
-    // Метод установки связей между объектами
-    void setup_connections();
     // Метод сигнала
     void signal(string& payload);
     // Метод обработки сигнала
