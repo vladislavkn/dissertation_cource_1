@@ -6,6 +6,8 @@
 #include <vector>
 #include <iostream>
 #include <string>
+#include <map>
+#include <cmath>
 using namespace std;
 
 struct Connection;
@@ -14,8 +16,8 @@ class Object;
 // Базовый класс
 class Object {
     public:
-        typedef void (Object::*TYPE_SIGNAL)(string&);
-        typedef void (Object::*TYPE_HANDLER)(string);
+        typedef void (Object::*TYPE_SIGNAL)(vector<string>&);
+        typedef void (Object::*TYPE_HANDLER)(vector<string>);
         // Конструктор базового класса
         Object(Object*, string name);
         // Деструктор базового класса
@@ -27,11 +29,11 @@ class Object {
         // Метод вывода объекта и его потомков
         void print_subjects(int depth=0);
         // Метод установки указателя на объект-родитель
-        void set_head_object_pointer(Object*);
+        void set_parent(Object*);
         // Метод поиска объекта в иерархии по имени
         Object* find_by_name(string name);
         // Метод получения указателя на объект-родитель
-        Object* get_head_object_pointer();
+        Object* get_parent();
         // Метод установки готовности объекта
         void set_readiness(int readiness);
         // Метод вывода дерева иерархии объектов с показателем их готовности
@@ -39,13 +41,13 @@ class Object {
         // Поиск объекта по его пути
         Object* find_by_path(string path);
         // Поиск головного объекта в иерархии
-        Object*    find_head();
+        Object* find_head();
         // Метод установки связи
         void set_connection(TYPE_SIGNAL, Object*, TYPE_HANDLER);
         // Методу удаления связи
         void remove_connection(TYPE_SIGNAL, Object*, TYPE_HANDLER);
         // Метод выдачи сигнала
-        void emit_signal(TYPE_SIGNAL, string&);
+        void emit_signal(TYPE_SIGNAL, vector<string>&);
         // Метод получения абсолютного пути до текущего объекта
         string get_absolute_path(string end="");
         // метод установки готовности всех объектов
@@ -53,6 +55,9 @@ class Object {
         int get_class_number();
     protected:
         int class_number;
+        // Массив указателей на объекты-потомки
+        vector<Object*> children;
+        int readiness = 0;
     private:
         struct Connection {
             TYPE_SIGNAL signal;
@@ -66,10 +71,7 @@ class Object {
         // Имя объекта
         string name;
         // Указатель на родительский объект
-        Object* head_object_pointer;
-        // Массив указателей на объекты-потомки
-        vector<Object*> subjects_pointers;
-        int readiness = 0;
+        Object* parent;
 };
 
 #endif

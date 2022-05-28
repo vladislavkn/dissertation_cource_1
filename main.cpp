@@ -1,8 +1,8 @@
-#include "Application.h"
+#include "System.h"
 
 int main()
 {
-    Application app(nullptr);
+    System app(nullptr);
     app.build_objects_tree();
     
     return app.start();

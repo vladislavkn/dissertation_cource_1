@@ -8,13 +8,14 @@
 
 /* Begin PBXBuildFile section */
 		8453D47D283F8C18000B5176 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8453D47C283F8C18000B5176 /* main.cpp */; };
-		8453D484283F8D1B000B5176 /* Application.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8453D483283F8D1B000B5176 /* Application.cpp */; };
-		8453D486283F8D38000B5176 /* Derived_2.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8453D485283F8D38000B5176 /* Derived_2.cpp */; };
-		8453D488283F8D4A000B5176 /* Derived_3.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8453D487283F8D4A000B5176 /* Derived_3.cpp */; };
-		8453D48A283F8D57000B5176 /* Derived_4.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8453D489283F8D57000B5176 /* Derived_4.cpp */; };
-		8453D48C283F8D67000B5176 /* Derived_5.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8453D48B283F8D67000B5176 /* Derived_5.cpp */; };
-		8453D48E283F8D77000B5176 /* Derived_6.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8453D48D283F8D77000B5176 /* Derived_6.cpp */; };
+		8453D484283F8D1B000B5176 /* System.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8453D483283F8D1B000B5176 /* System.cpp */; };
+		8453D486283F8D38000B5176 /* Safe.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8453D485283F8D38000B5176 /* Safe.cpp */; };
+		8453D488283F8D4A000B5176 /* Reader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8453D487283F8D4A000B5176 /* Reader.cpp */; };
+		8453D48A283F8D57000B5176 /* SafeBox.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8453D489283F8D57000B5176 /* SafeBox.cpp */; };
+		8453D48C283F8D67000B5176 /* Control.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8453D48B283F8D67000B5176 /* Control.cpp */; };
+		8453D48E283F8D77000B5176 /* Server.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8453D48D283F8D77000B5176 /* Server.cpp */; };
 		8453D490283F8D98000B5176 /* Object.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8453D48F283F8D98000B5176 /* Object.cpp */; };
+		847D622B2841547900499A58 /* Display.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 847D622A2841547900499A58 /* Display.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -32,20 +33,22 @@
 /* Begin PBXFileReference section */
 		8453D479283F8C18000B5176 /* dissertation_cource_1 */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = dissertation_cource_1; sourceTree = BUILT_PRODUCTS_DIR; };
 		8453D47C283F8C18000B5176 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
-		8453D483283F8D1B000B5176 /* Application.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Application.cpp; sourceTree = "<group>"; };
-		8453D485283F8D38000B5176 /* Derived_2.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Derived_2.cpp; sourceTree = "<group>"; };
-		8453D487283F8D4A000B5176 /* Derived_3.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Derived_3.cpp; sourceTree = "<group>"; };
-		8453D489283F8D57000B5176 /* Derived_4.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Derived_4.cpp; sourceTree = "<group>"; };
-		8453D48B283F8D67000B5176 /* Derived_5.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Derived_5.cpp; sourceTree = "<group>"; };
-		8453D48D283F8D77000B5176 /* Derived_6.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Derived_6.cpp; sourceTree = "<group>"; };
+		8453D483283F8D1B000B5176 /* System.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = System.cpp; sourceTree = "<group>"; };
+		8453D485283F8D38000B5176 /* Safe.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Safe.cpp; sourceTree = "<group>"; };
+		8453D487283F8D4A000B5176 /* Reader.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Reader.cpp; sourceTree = "<group>"; };
+		8453D489283F8D57000B5176 /* SafeBox.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = SafeBox.cpp; sourceTree = "<group>"; };
+		8453D48B283F8D67000B5176 /* Control.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Control.cpp; sourceTree = "<group>"; };
+		8453D48D283F8D77000B5176 /* Server.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Server.cpp; sourceTree = "<group>"; };
 		8453D48F283F8D98000B5176 /* Object.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Object.cpp; sourceTree = "<group>"; };
-		8453D491283F8DB6000B5176 /* Application.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Application.h; sourceTree = "<group>"; };
-		8470C3B0283F8DE100BCE09B /* Derived_2.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Derived_2.h; sourceTree = "<group>"; };
-		8470C3B1283F8DEF00BCE09B /* Derived_3.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Derived_3.h; sourceTree = "<group>"; };
-		8470C3B2283F8DF500BCE09B /* Derived_4.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Derived_4.h; sourceTree = "<group>"; };
-		8470C3B3283F8E0400BCE09B /* Derived_5.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Derived_5.h; sourceTree = "<group>"; };
-		8470C3B4283F8E0E00BCE09B /* Derived_6.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Derived_6.h; sourceTree = "<group>"; };
+		8453D491283F8DB6000B5176 /* System.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = System.h; sourceTree = "<group>"; };
+		8470C3B0283F8DE100BCE09B /* Safe.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Safe.h; sourceTree = "<group>"; };
+		8470C3B1283F8DEF00BCE09B /* Reader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Reader.h; sourceTree = "<group>"; };
+		8470C3B2283F8DF500BCE09B /* SafeBox.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SafeBox.h; sourceTree = "<group>"; };
+		8470C3B3283F8E0400BCE09B /* Control.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Control.h; sourceTree = "<group>"; };
+		8470C3B4283F8E0E00BCE09B /* Server.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Server.h; sourceTree = "<group>"; };
 		8470C3B5283F8E1700BCE09B /* Object.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Object.h; sourceTree = "<group>"; };
+		847D62282840D8DB00499A58 /* Display.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Display.h; sourceTree = "<group>"; };
+		847D622A2841547900499A58 /* Display.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Display.cpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -62,21 +65,15 @@
 		8453D470283F8C18000B5176 = {
 			isa = PBXGroup;
 			children = (
+				847D62272840D8B300499A58 /* Display */,
+				847D62262840D6D100499A58 /* Server */,
+				847D62252840D6B500499A58 /* Object */,
+				847D62242840D6A500499A58 /* Control */,
+				847D62232840D68B00499A58 /* System */,
+				847D62222840D67700499A58 /* SafeBox */,
+				847D62212840D66500499A58 /* Safe */,
+				847D62202840D65400499A58 /* Reader */,
 				8453D47C283F8C18000B5176 /* main.cpp */,
-				8453D483283F8D1B000B5176 /* Application.cpp */,
-				8453D485283F8D38000B5176 /* Derived_2.cpp */,
-				8453D487283F8D4A000B5176 /* Derived_3.cpp */,
-				8453D489283F8D57000B5176 /* Derived_4.cpp */,
-				8453D48B283F8D67000B5176 /* Derived_5.cpp */,
-				8453D48D283F8D77000B5176 /* Derived_6.cpp */,
-				8453D48F283F8D98000B5176 /* Object.cpp */,
-				8453D491283F8DB6000B5176 /* Application.h */,
-				8470C3B0283F8DE100BCE09B /* Derived_2.h */,
-				8470C3B1283F8DEF00BCE09B /* Derived_3.h */,
-				8470C3B2283F8DF500BCE09B /* Derived_4.h */,
-				8470C3B3283F8E0400BCE09B /* Derived_5.h */,
-				8470C3B4283F8E0E00BCE09B /* Derived_6.h */,
-				8470C3B5283F8E1700BCE09B /* Object.h */,
 				8453D47A283F8C18000B5176 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -87,6 +84,78 @@
 				8453D479283F8C18000B5176 /* dissertation_cource_1 */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		847D62202840D65400499A58 /* Reader */ = {
+			isa = PBXGroup;
+			children = (
+				8453D487283F8D4A000B5176 /* Reader.cpp */,
+				8470C3B1283F8DEF00BCE09B /* Reader.h */,
+			);
+			name = Reader;
+			sourceTree = "<group>";
+		};
+		847D62212840D66500499A58 /* Safe */ = {
+			isa = PBXGroup;
+			children = (
+				8453D485283F8D38000B5176 /* Safe.cpp */,
+				8470C3B0283F8DE100BCE09B /* Safe.h */,
+			);
+			name = Safe;
+			sourceTree = "<group>";
+		};
+		847D62222840D67700499A58 /* SafeBox */ = {
+			isa = PBXGroup;
+			children = (
+				8453D489283F8D57000B5176 /* SafeBox.cpp */,
+				8470C3B2283F8DF500BCE09B /* SafeBox.h */,
+			);
+			name = SafeBox;
+			sourceTree = "<group>";
+		};
+		847D62232840D68B00499A58 /* System */ = {
+			isa = PBXGroup;
+			children = (
+				8453D483283F8D1B000B5176 /* System.cpp */,
+				8453D491283F8DB6000B5176 /* System.h */,
+			);
+			name = System;
+			sourceTree = "<group>";
+		};
+		847D62242840D6A500499A58 /* Control */ = {
+			isa = PBXGroup;
+			children = (
+				8453D48B283F8D67000B5176 /* Control.cpp */,
+				8470C3B3283F8E0400BCE09B /* Control.h */,
+			);
+			name = Control;
+			sourceTree = "<group>";
+		};
+		847D62252840D6B500499A58 /* Object */ = {
+			isa = PBXGroup;
+			children = (
+				8470C3B5283F8E1700BCE09B /* Object.h */,
+				8453D48F283F8D98000B5176 /* Object.cpp */,
+			);
+			name = Object;
+			sourceTree = "<group>";
+		};
+		847D62262840D6D100499A58 /* Server */ = {
+			isa = PBXGroup;
+			children = (
+				8453D48D283F8D77000B5176 /* Server.cpp */,
+				8470C3B4283F8E0E00BCE09B /* Server.h */,
+			);
+			name = Server;
+			sourceTree = "<group>";
+		};
+		847D62272840D8B300499A58 /* Display */ = {
+			isa = PBXGroup;
+			children = (
+				847D62282840D8DB00499A58 /* Display.h */,
+				847D622A2841547900499A58 /* Display.cpp */,
+			);
+			name = Display;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -146,14 +215,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8453D484283F8D1B000B5176 /* Application.cpp in Sources */,
-				8453D48C283F8D67000B5176 /* Derived_5.cpp in Sources */,
+				8453D484283F8D1B000B5176 /* System.cpp in Sources */,
+				8453D48C283F8D67000B5176 /* Control.cpp in Sources */,
 				8453D490283F8D98000B5176 /* Object.cpp in Sources */,
-				8453D48E283F8D77000B5176 /* Derived_6.cpp in Sources */,
-				8453D48A283F8D57000B5176 /* Derived_4.cpp in Sources */,
-				8453D486283F8D38000B5176 /* Derived_2.cpp in Sources */,
+				8453D48E283F8D77000B5176 /* Server.cpp in Sources */,
+				8453D48A283F8D57000B5176 /* SafeBox.cpp in Sources */,
+				8453D486283F8D38000B5176 /* Safe.cpp in Sources */,
 				8453D47D283F8C18000B5176 /* main.cpp in Sources */,
-				8453D488283F8D4A000B5176 /* Derived_3.cpp in Sources */,
+				8453D488283F8D4A000B5176 /* Reader.cpp in Sources */,
+				847D622B2841547900499A58 /* Display.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
