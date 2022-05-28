@@ -53,7 +53,6 @@ class Object {
         string get_absolute_path(string end="");
         // метод установки готовности всех объектов
         void set_readiness_for_all(int);
-        int get_class_number();
     protected:
         // Массив указателей на объекты-потомки
         vector<Object*> children;

@@ -93,7 +93,7 @@ int System::start() {
             }
             case ShowTree:{
                 print_subjects_with_readiness();
-                set_readiness(0);
+                nextOperation = StopSystem;
                 break;}
             case Recover: {
                 emit_signal(TOSIGNAL(System::signalPrint), Triple("\nReady to work"));
@@ -113,6 +113,15 @@ int System::start() {
                 state = WaitingBankKey;
                 break;
             }
+            case ReactWrongSeq: {
+                emit_signal(TOSIGNAL(System::signalPrint), Triple("\nError in the command sequence"));
+                nextOperation = Recover;
+                break;
+            }
+            case StopSystem: {
+                emit_signal(TOSIGNAL(System::signalPrint), Triple("\nTurn off the safe"));
+                set_readiness(0);
+            }
             default:
                 break;
         }
@@ -130,23 +139,23 @@ int System::start() {
 // Обработчик ввода из консоли
 void System::handleNewLine(Triple args) {
     saved_args = args; // Сохраняем данные ввода для того, чтобы обработать их в цикле
-    if(state == InputSafeDimentions) nextOperation = SetSafeDimentions;
+    if(args.first == "SHOW_TREE") nextOperation = ShowTree;
+    else if (args.first == "Turn") nextOperation = StopSystem;
+    else if(state == InputSafeDimentions) nextOperation = SetSafeDimentions;
     else if(state == InputBoxKeys) nextOperation = SetBoxKeys;
     else if(state == WaitingComleteKeyEntry) nextOperation = Recover;
     else if(state == ExecuteCommands) {
         if(args.first == "BOX") nextOperation = SelectBox;
         else if(args.first == "CLOSE_BOX") nextOperation = CloseBox;
-        else if(args.first == "SHOW_TREE") nextOperation = ShowTree;
-        else if (args.first == "Turn") set_readiness(0);
-        else nextOperation = Recover;
+        else nextOperation = ReactWrongSeq;
     } else if(state == WaitingClientKey) {
         if(args.first == "CLIENT_KEY") nextOperation = ApplyClientKey;
         else if(args.first == "CANCEL") nextOperation = Reset;
-        else nextOperation = Recover;
+        else nextOperation = ReactWrongSeq;
     } else if(state == WaitingBankKey) {
         if(args.first == "BANK_KEY") nextOperation = ApplyBankKey;
         else if(args.first == "CANCEL") nextOperation = Reset;
-        else nextOperation = Recover;
+        else nextOperation = ReactWrongSeq;
     }
 }
 

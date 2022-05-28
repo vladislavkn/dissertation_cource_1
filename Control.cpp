@@ -28,7 +28,7 @@ void Control::handleSelectBox(Triple args) {
     if(safe->get_box_by_number(stoi(args.first))->get_box_state() == SafeBox::SafeBoxState::Closed) {
         emit_signal(TOSIGNAL(Control::signalSelectBox), args);
     } else {
-        emit_signal(TOSIGNAL(Control::signalError), Triple("The safe deposit box " + args.first + " is open", "0", "3"));
+        emit_signal(TOSIGNAL(Control::signalError), Triple("\nThe safe deposit box is open", "11", "3"));
     }
 }
 
@@ -40,7 +40,7 @@ void Control::handleApplyClientKey(Triple args) {
     if(server->validateBoxClientkey(openBoxNumber, clientKey)) {
         emit_signal(TOSIGNAL(Control::signaleSetSafeState), Triple(to_string(Safe::SafeState::WaitingBankKey)));
     } else {
-        emit_signal(TOSIGNAL(Control::signalError), Triple("The client is key is incorrect", "0", "4"));
+        emit_signal(TOSIGNAL(Control::signalError), Triple("\nThe client is key is incorrect", "0", "4"));
     }
 }
 
@@ -51,8 +51,9 @@ void Control::handleApplyBankKey(Triple args) {
     int openBoxNumber = safe->get_open_box_number();
     if(server->validateBoxBankkey(openBoxNumber, bankKey)) {
         emit_signal(TOSIGNAL(Control::signalOpenBox), Triple());
+        emit_signal(TOSIGNAL(Control::signalError), Triple("\nThe safe deposit box " + to_string(openBoxNumber) + " is open", "11", "3"));
     } else {
-        emit_signal(TOSIGNAL(Control::signalError), Triple("The bank is key is incorrect", "0", "5"));
+        emit_signal(TOSIGNAL(Control::signalError), Triple("\nThe bank is key is incorrect", "0", "5"));
     }
 }
 

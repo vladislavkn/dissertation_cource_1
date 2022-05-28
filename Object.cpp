@@ -175,10 +175,6 @@ string Object::get_absolute_path(string end) {
     return parent->get_absolute_path("/") + name + end;
 }
 
-int Object::get_class_number() {
-    return class_number;
-}
-
 void Object::set_readiness_for_all(int readiness) {
     set_readiness(readiness);
     for(int i = 0; i < children.size(); i++)

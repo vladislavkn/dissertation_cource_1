@@ -1,8 +1,6 @@
 #include "Safe.h"
     
-Safe::Safe(Object* parent, string name) : Object(parent, name) {
-    class_number = 2;
-}
+Safe::Safe(Object* parent, string name) : Object(parent, name) {}
     
 SafeBox* Safe::get_box_by_number(int number) {
     for(int i = 0; i < children.size(); i++) {
