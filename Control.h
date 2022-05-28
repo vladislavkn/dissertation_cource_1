@@ -13,8 +13,6 @@ public:
     void signalCloseBox(vector<string>&);
     void signalSetBoxKeys(vector<string>&);
     void signalError(vector<string>&);
-    void signalPassCommand(vector<string>&);
-    void signalPrint(vector<string>&);
     void signalAddBox(vector<string>&);
     void signaleSetSafeState(vector<string>&);
     void signalResetSafe(vector<string>&);

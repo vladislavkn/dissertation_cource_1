@@ -107,8 +107,7 @@ void System::handleNewLine(vector<string> args) {
     } else if(state == InputBoxKeys) {
         nextOperation = SetBoxKeys;
     } else if(state == WaitingComleteKeyEntry) {
-        nextOperation = Input;
-        state = ExecuteCommands;
+        nextOperation = Recover;
     } else if(state == ExecuteCommands) {
         string command = args[0];
         if(command == "BOX") {
@@ -128,7 +127,7 @@ void System::handleNewLine(vector<string> args) {
         } else nextOperation = Recover;
     } else if(state == WaitingBankKey) {
         if(args[0] == "BANK_KEY") {
-            nextOperation = ApplyClientKey;
+            nextOperation = ApplyBankKey;
         } else if(args[0] == "CANCEL") {
             nextOperation = Reset;
         } else nextOperation = Recover;
@@ -140,7 +139,6 @@ void System::handleError(vector<string> args) {
     emit_signal(TOSIGNAL(System::signalPrint), printArgs);
     overridedState.first = stoi(args[1]);
     overridedState.second = stoi(args[2]);
-    
 }
 
 void System::signalSetSafeDimentions(vector<string> &args) {}

@@ -32,10 +32,8 @@ void Control::handleSelectBox(vector<string> args) {
     if(safe->get_box_by_number(stoi(args[0]))->get_box_state() == SafeBox::SafeBoxState::Closed) {
         emit_signal(TOSIGNAL(Control::signalSelectBox), args);
     } else {
-        vector<string> printArgs = {"The safe deposit box " + args[0] + " is open"};
-        vector<string> passCommandArgs = {};
-        emit_signal(TOSIGNAL(Control::signalPrint), printArgs);
-        emit_signal(TOSIGNAL(Control::signalPassCommand), passCommandArgs);
+        vector<string> errorArgs = {"The safe deposit box " + args[0] + " is open", "0", "3"};
+        emit_signal(TOSIGNAL(Control::signalError), errorArgs);
     }
 }
 
@@ -85,12 +83,13 @@ void Control::signaleSetSafeState(vector<string>&) {}
 void Control::signalResetSafe(vector<string>&) {}
 
 void Control::signalSelectBox(vector<string>&) {};
+
 void Control::signalOpenBox(vector<string>&) {};
+
 void Control::signalCloseBox(vector<string>&) {};
+
 void Control::signalSetBoxKeys(vector<string>&) {};
 
 void Control::signalError(vector<string>&) {};
 
-void Control::signalPassCommand(vector<string>&) {};
-void Control::signalPrint(vector<string>&) {};
 void Control::signalAddBox(vector<string> &) {};
