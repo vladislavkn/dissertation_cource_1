@@ -7,8 +7,10 @@ class Reader : public Object {
 public:
     Reader(Object* parent, string name="reader");
     vector<string> nextLine();
-    void handleInputLine(vector<string>);
-    void signalNewLine(vector<string>&);
+    
+    void handleInputLine(Triple);
+    
+    void signalNewLine(Triple&);
 private:
     vector<string> input;
 };

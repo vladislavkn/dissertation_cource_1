@@ -3,10 +3,9 @@
 
 Server::Server(Object* parent, string name) : Object(parent, name) {}
 
-void Server::handleSetBoxKeys(vector<string> args) {
-    if(args.size() != 3) return;
-    int boxNumber = stoi(args[0]);
-    pair<string, string> keysPair(args[1], args[2]);
+void Server::handleSetBoxKeys(Triple args) {
+    int boxNumber = stoi(args.first);
+    pair<string, string> keysPair(args.second, args.third);
     keys[boxNumber] = keysPair;
 }
 

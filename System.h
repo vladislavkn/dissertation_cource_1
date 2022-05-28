@@ -18,27 +18,26 @@ public:
     void build_objects_tree();
     // Метод старта приложения
     int start();
-    // Метод сигнала
-    void signalInputLine(string& payload);
     // Метод обработки сигнала
-    void handleNewLine(vector<string>);
-    void handleError(vector<string>);
+    void handleNewLine(Triple);
+    void handleError(Triple);
     
-    void signalResetSafe(vector<string>&);
-    void signalSetSafeDimentions(vector<string>&);
-    void signalSetSafeBoxKeys(vector<string>&);
-    void signalSelectBox(vector<string>&);
-    void signalApplyClientKey(vector<string>&);
-    void signalApplyBankKey(vector<string>&);
-    void signalPrint(vector<string>&);
-    void signalCloseBox(vector<string>&);
+    void signalInputLine(Triple&);
+    void signalResetSafe(Triple&);
+    void signalSetSafeDimentions(Triple&);
+    void signalSetSafeBoxKeys(Triple&);
+    void signalSelectBox(Triple&);
+    void signalApplyClientKey(Triple&);
+    void signalApplyBankKey(Triple&);
+    void signalPrint(Triple&);
+    void signalCloseBox(Triple&);
 private:
     enum OperationType { Input, SetSafeDimentions, SetBoxKeys, StopSystem, SelectBox, ApplyClientKey, ApplyBankKey, CloseBox, Cancel, ShowTree, Reset, Recover, PromptClientCode, PromptBankCode };
     enum SystemState { InputSafeDimentions, InputBoxKeys, WaitingComleteKeyEntry, ExecuteCommands, WaitingClientKey, WaitingBankKey};
     OperationType nextOperation = Input;
     SystemState state = InputSafeDimentions;
     pair<int, int> overridedState = {-1, -1};
-    vector<string> saved_args;
+    Triple saved_args;
 };
 
 #endif

@@ -10,7 +10,8 @@ public:
     SafeBoxState get_box_state();
     void set_box_state(SafeBoxState new_safe_box_state);
     int get_box_number();
-    void handleSetBoxState(vector<string>);
+    
+    void handleSetBoxState(Triple);
 private:
     int box_number;
     SafeBoxState state = SafeBoxState::Closed;

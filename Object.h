@@ -8,6 +8,7 @@
 #include <string>
 #include <map>
 #include <cmath>
+#include "Triple.h"
 using namespace std;
 
 struct Connection;
@@ -16,8 +17,8 @@ class Object;
 // Базовый класс
 class Object {
     public:
-        typedef void (Object::*TYPE_SIGNAL)(vector<string>&);
-        typedef void (Object::*TYPE_HANDLER)(vector<string>);
+        typedef void (Object::*TYPE_SIGNAL)(Triple&);
+        typedef void (Object::*TYPE_HANDLER)(Triple);
         // Конструктор базового класса
         Object(Object*, string name);
         // Деструктор базового класса
@@ -47,14 +48,13 @@ class Object {
         // Методу удаления связи
         void remove_connection(TYPE_SIGNAL, Object*, TYPE_HANDLER);
         // Метод выдачи сигнала
-        void emit_signal(TYPE_SIGNAL, vector<string>&);
+        void emit_signal(TYPE_SIGNAL, Triple);
         // Метод получения абсолютного пути до текущего объекта
         string get_absolute_path(string end="");
         // метод установки готовности всех объектов
         void set_readiness_for_all(int);
         int get_class_number();
     protected:
-        int class_number;
         // Массив указателей на объекты-потомки
         vector<Object*> children;
         int readiness = 0;

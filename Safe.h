@@ -12,14 +12,16 @@ public:
     int n, m;
     SafeBox* get_box_by_number(int number);
     int get_open_box_number();
-    void handleSetSafeDimentions(vector<string>);
-    void handleSelectBox(vector<string>);
-    void handleOpenBox(vector<string>);
-    void handleCloseBox(vector<string>);
-    void handleAddBox(vector<string>);
-    void handleSetSafeState(vector<string>);
-    void handleResetSafe(vector<string>);
-    void signalSetBoxState(vector<string>&);
+    
+    void handleSetSafeDimentions(Triple);
+    void handleSelectBox(Triple);
+    void handleOpenBox(Triple);
+    void handleCloseBox(Triple);
+    void handleAddBox(Triple);
+    void handleSetSafeState(Triple);
+    void handleResetSafe(Triple);
+    
+    void signalSetBoxState(Triple&);
     int getAllBoxesCount();
 private:
     int open_box_number = 0;

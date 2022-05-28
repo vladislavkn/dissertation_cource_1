@@ -3,16 +3,18 @@
 System::System(Object* parent, string name) : Object(parent, name) {}
 
 void System::build_objects_tree() {
+    // Создаем основные объекты
     Control* control = new Control(this);
     Server* server = new Server(control);
     Safe* safe = new Safe(control);
     Reader* reader = new Reader(this);
     Display* display = new Display(this);
     
+    // Строим связи
     set_connection(TOSIGNAL(System::signalPrint), display, TOHANDLER(Display::handlePrint));
     
     control->set_connection(TOSIGNAL(Control::signalError), this, TOHANDLER(System::handleError));
-
+    
     set_connection(TOSIGNAL(System::signalInputLine), reader, TOHANDLER(Reader::handleInputLine));
     reader->set_connection(TOSIGNAL(Reader::signalNewLine), this, TOHANDLER(System::handleNewLine));
     
@@ -42,61 +44,80 @@ void System::build_objects_tree() {
 int System::start() {
     print_subjects();
     set_readiness_for_all(1);
-    vector<string> inputLineArgs;
+    // Цикл тактов
     while(readiness != 0) {
-        if(nextOperation == Input) {
-            emit_signal(TOSIGNAL(System::signalInputLine), inputLineArgs);
-        } else if(nextOperation == SetSafeDimentions) {
-            emit_signal(TOSIGNAL(System::signalSetSafeDimentions), saved_args);
-            state = InputBoxKeys;
-            nextOperation = Input;
-        } else if(nextOperation == SetBoxKeys) {
-            emit_signal(TOSIGNAL(System::signalSetSafeBoxKeys), saved_args);
-            Control* control = (Control*) find_by_path("/control");
-            if(control->isAllBoxesConfigured()) state = WaitingComleteKeyEntry;
-            nextOperation = Input;
-        } else if(nextOperation == SelectBox) {
-            vector<string> selectboxArgs = {saved_args[1]};
-            emit_signal(TOSIGNAL(System::signalSelectBox), selectboxArgs);
-            nextOperation = PromptClientCode;
-        } else if(nextOperation == ApplyClientKey) {
-            vector<string> applyClientKeyArgs = { saved_args[1] };
-            emit_signal(TOSIGNAL(System::signalApplyClientKey), applyClientKeyArgs);
-            nextOperation = PromptBankCode;
-        } else if(nextOperation == ApplyBankKey) {
-            vector<string> applyBankKeyArgs = { saved_args[1] };
-            emit_signal(TOSIGNAL(System::signalApplyBankKey), applyBankKeyArgs);
-            nextOperation = Input;
-            state = ExecuteCommands;
-        } else if(nextOperation == Reset) {
-            vector<string> resetSafeArgs;
-            emit_signal(TOSIGNAL(System::signalResetSafe), resetSafeArgs);
-            nextOperation = Recover;
-        } else if(nextOperation == CloseBox) {
-            vector<string> closeBoxArgs = { saved_args[1] };
-            emit_signal(TOSIGNAL(System::signalCloseBox), closeBoxArgs);
-            nextOperation = Input;
-            state = ExecuteCommands;
-        } else if(nextOperation == ShowTree) {
-            print_subjects_with_readiness();
-            set_readiness(0);
-        } else if(nextOperation == Recover) {
-            vector<string> printArgs = {"\nReady to work"};
-            emit_signal(TOSIGNAL(System::signalPrint), printArgs);
-            nextOperation = Input;
-            state = ExecuteCommands;
-        } else if(nextOperation == PromptClientCode) {
-            vector<string> printArgs = {"\nEnter the code"};
-            emit_signal(TOSIGNAL(System::signalPrint), printArgs);
-            nextOperation = Input;
-            state = WaitingClientKey;
-        } else if(nextOperation == PromptBankCode) {
-            vector<string> printArgs = {"\nEnter the bank code"};
-            emit_signal(TOSIGNAL(System::signalPrint), printArgs);
-            nextOperation = Input;
-            state = WaitingBankKey;
+        switch (nextOperation) {
+            case Input:{
+                emit_signal(TOSIGNAL(System::signalInputLine), Triple());
+                break;
+            }
+            case SetSafeDimentions:{
+                emit_signal(TOSIGNAL(System::signalSetSafeDimentions), saved_args);
+                state = InputBoxKeys;
+                nextOperation = Input;
+                break;
+            }
+            case SetBoxKeys:{
+                emit_signal(TOSIGNAL(System::signalSetSafeBoxKeys), saved_args);
+                Control* control = (Control*) find_by_path("/control");
+                if(control->isAllBoxesConfigured()) state = WaitingComleteKeyEntry;
+                nextOperation = Input;
+                break;
+            }
+            case SelectBox:{
+                emit_signal(TOSIGNAL(System::signalSelectBox), Triple(saved_args.second));
+                nextOperation = PromptClientCode;
+                break;
+            }
+            case ApplyClientKey:{
+                emit_signal(TOSIGNAL(System::signalApplyClientKey), Triple(saved_args.second));
+                nextOperation = PromptBankCode;
+                break;
+            }
+            case ApplyBankKey:{
+                emit_signal(TOSIGNAL(System::signalApplyBankKey), Triple(saved_args.second));
+                nextOperation = Input;
+                state = ExecuteCommands;
+                break;
+            }
+            case Reset:{
+                emit_signal(TOSIGNAL(System::signalResetSafe), Triple());
+                nextOperation = Recover;
+                break;
+            }
+            case CloseBox:{
+                emit_signal(TOSIGNAL(System::signalCloseBox), Triple(saved_args.second));
+                nextOperation = Input;
+                state = ExecuteCommands;
+                break;
+            }
+            case ShowTree:{
+                print_subjects_with_readiness();
+                set_readiness(0);
+                break;}
+            case Recover: {
+                emit_signal(TOSIGNAL(System::signalPrint), Triple("\nReady to work"));
+                nextOperation = Input;
+                state = ExecuteCommands;
+                break;
+            }
+            case PromptClientCode:{
+                emit_signal(TOSIGNAL(System::signalPrint), Triple("\nEnter the code"));
+                nextOperation = Input;
+                state = WaitingClientKey;
+                break;
+            }
+            case PromptBankCode:{
+                emit_signal(TOSIGNAL(System::signalPrint), Triple("\nEnter the bank code"));
+                nextOperation = Input;
+                state = WaitingBankKey;
+                break;
+            }
+            default:
+                break;
         }
         
+        // Если была ошибка, обновляем состояние
         if(overridedState.first >= 0 && overridedState.second >= 0) {
             nextOperation = (OperationType) overridedState.first;
             state = (SystemState) overridedState.second;
@@ -106,61 +127,50 @@ int System::start() {
     return 0;
 }
 
-void System::handleNewLine(vector<string> args) {
-    saved_args = args;
-    if(state == InputSafeDimentions) { 
-        nextOperation = SetSafeDimentions;
-    } else if(state == InputBoxKeys) {
-        nextOperation = SetBoxKeys;
-    } else if(state == WaitingComleteKeyEntry) {
-        nextOperation = Recover;
-    } else if(state == ExecuteCommands) {
-        string command = args[0];
-        if(command == "BOX") {
-            nextOperation = SelectBox;
-        } else if(command == "CLOSE_BOX") {
-            nextOperation = CloseBox;
-        } else if(command == "SHOW_TREE") {
-            nextOperation = ShowTree;
-        } else if (command == "Turn") {
-            set_readiness(0);
-        }
+// Обработчик ввода из консоли
+void System::handleNewLine(Triple args) {
+    saved_args = args; // Сохраняем данные ввода для того, чтобы обработать их в цикле
+    if(state == InputSafeDimentions) nextOperation = SetSafeDimentions;
+    else if(state == InputBoxKeys) nextOperation = SetBoxKeys;
+    else if(state == WaitingComleteKeyEntry) nextOperation = Recover;
+    else if(state == ExecuteCommands) {
+        if(args.first == "BOX") nextOperation = SelectBox;
+        else if(args.first == "CLOSE_BOX") nextOperation = CloseBox;
+        else if(args.first == "SHOW_TREE") nextOperation = ShowTree;
+        else if (args.first == "Turn") set_readiness(0);
+        else nextOperation = Recover;
     } else if(state == WaitingClientKey) {
-        if(args[0] == "CLIENT_KEY") {
-            nextOperation = ApplyClientKey;
-        } else if(args[0] == "CANCEL") {
-            nextOperation = Reset;
-        } else nextOperation = Recover;
+        if(args.first == "CLIENT_KEY") nextOperation = ApplyClientKey;
+        else if(args.first == "CANCEL") nextOperation = Reset;
+        else nextOperation = Recover;
     } else if(state == WaitingBankKey) {
-        if(args[0] == "BANK_KEY") {
-            nextOperation = ApplyBankKey;
-        } else if(args[0] == "CANCEL") {
-            nextOperation = Reset;
-        } else nextOperation = Recover;
+        if(args.first == "BANK_KEY") nextOperation = ApplyBankKey;
+        else if(args.first == "CANCEL") nextOperation = Reset;
+        else nextOperation = Recover;
     }
 }
 
-void System::handleError(vector<string> args) {
-    vector<string> printArgs = {args[0]};
-    emit_signal(TOSIGNAL(System::signalPrint), printArgs);
-    overridedState.first = stoi(args[1]);
-    overridedState.second = stoi(args[2]);
+// При ошибке пишем сообщение в консоль и изменяем состояние
+void System::handleError(Triple args) {
+    emit_signal(TOSIGNAL(System::signalPrint), Triple(args.first));
+    overridedState.first = stoi(args.second);
+    overridedState.second = stoi(args.third);
 }
 
-void System::signalSetSafeDimentions(vector<string> &args) {}
+void System::signalSetSafeDimentions(Triple &args) {}
 
-void System::signalInputLine(string& payload) {}
+void System::signalInputLine(Triple& payload) {}
 
-void System::signalSetSafeBoxKeys(vector<string>&) {}
+void System::signalSetSafeBoxKeys(Triple&) {}
 
-void System::signalSelectBox(vector<string> &) {}
+void System::signalSelectBox(Triple&) {}
 
-void System::signalApplyClientKey(vector<string> &) {}
+void System::signalApplyClientKey(Triple&) {}
 
-void System::signalApplyBankKey(vector<string> &) {}
+void System::signalApplyBankKey(Triple&) {}
 
-void System::signalPrint(vector<string>&) {}
+void System::signalPrint(Triple&) {}
 
-void System::signalResetSafe(vector<string>&) {}
+void System::signalResetSafe(Triple&) {}
 
-void System::signalCloseBox(vector<string> &) {}
+void System::signalCloseBox(Triple&) {}
