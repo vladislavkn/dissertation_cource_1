@@ -33,7 +33,7 @@ public:
     void signalPrint(vector<string>&);
     void signalCloseBox(vector<string>&);
 private:
-    enum OperationType { Input, SetSafeDimentions, SetBoxKeys, StopSystem, SelectBox, ApplyClientKey, ApplyBankKey, CloseBox, Cancel, ShowTree, Reset, Recover };
+    enum OperationType { Input, SetSafeDimentions, SetBoxKeys, StopSystem, SelectBox, ApplyClientKey, ApplyBankKey, CloseBox, Cancel, ShowTree, Reset, Recover, PromptClientCode, PromptBankCode };
     enum SystemState { InputSafeDimentions, InputBoxKeys, WaitingComleteKeyEntry, ExecuteCommands, WaitingClientKey, WaitingBankKey};
     OperationType nextOperation = Input;
     SystemState state = InputSafeDimentions;

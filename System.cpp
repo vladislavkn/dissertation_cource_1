@@ -53,20 +53,16 @@ int System::start() {
         } else if(nextOperation == SetBoxKeys) {
             emit_signal(TOSIGNAL(System::signalSetSafeBoxKeys), saved_args);
             Control* control = (Control*) find_by_path("/control");
-            if(control->isAllBoxesConfigured()) {
-                state = WaitingComleteKeyEntry;
-            }
+            if(control->isAllBoxesConfigured()) state = WaitingComleteKeyEntry;
             nextOperation = Input;
         } else if(nextOperation == SelectBox) {
             vector<string> selectboxArgs = {saved_args[1]};
             emit_signal(TOSIGNAL(System::signalSelectBox), selectboxArgs);
-            nextOperation = Input;
-            state = WaitingClientKey;
+            nextOperation = PromptClientCode;
         } else if(nextOperation == ApplyClientKey) {
             vector<string> applyClientKeyArgs = { saved_args[1] };
             emit_signal(TOSIGNAL(System::signalApplyClientKey), applyClientKeyArgs);
-            nextOperation = Input;
-            state = WaitingBankKey;
+            nextOperation = PromptBankCode;
         } else if(nextOperation == ApplyBankKey) {
             vector<string> applyBankKeyArgs = { saved_args[1] };
             emit_signal(TOSIGNAL(System::signalApplyBankKey), applyBankKeyArgs);
@@ -89,6 +85,16 @@ int System::start() {
             emit_signal(TOSIGNAL(System::signalPrint), printArgs);
             nextOperation = Input;
             state = ExecuteCommands;
+        } else if(nextOperation == PromptClientCode) {
+            vector<string> printArgs = {"\nEnter the code"};
+            emit_signal(TOSIGNAL(System::signalPrint), printArgs);
+            nextOperation = Input;
+            state = WaitingClientKey;
+        } else if(nextOperation == PromptBankCode) {
+            vector<string> printArgs = {"\nEnter the bank code"};
+            emit_signal(TOSIGNAL(System::signalPrint), printArgs);
+            nextOperation = Input;
+            state = WaitingBankKey;
         }
         
         if(overridedState.first >= 0 && overridedState.second >= 0) {
