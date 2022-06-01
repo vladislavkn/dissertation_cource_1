@@ -7,7 +7,7 @@ class Server : public Object {
 public:
     Server(Object* parent, string name="server");
     
-    void handleSetBoxKeys(Triple);
+    void handleSetBoxKeys(vector<string>);
     
     bool validateBoxClientkey(int boxNumber, string clientKey);
     bool validateBoxBankkey(int boxNumber, string bankKey);

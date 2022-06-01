@@ -2,10 +2,10 @@
 
 Reader::Reader(Object* parent, string name) : Object(parent, name) {}
     
-void Reader::signalNewLine(Triple&) {}
+void Reader::signalNewLine(vector<string>&) {}
 
 // Читаем строку из консоли и делим её по пробелам
-void Reader::handleInputLine(Triple) {
+void Reader::handleInputLine(vector<string>) {
     string line;
     getline(cin, line);  
     vector<string> input;
@@ -19,11 +19,9 @@ void Reader::handleInputLine(Triple) {
     }
     input.push_back(line.substr(initialPos, min(pos, line.size()) - initialPos + 1 ));
     
-    Triple args;
-    if(input.size() >= 1) args.first = input[0];
-    if(input.size() >= 2) args.second = input[1];
-    if(input.size() >= 3) args.third = input[2];
-    
+//    cout << endl << "GOT INPUT: ";
+//    for(string s : input) cout << s << " | ";
+//    cout << endl;
     // Даем сигнал системе на обработку строки
-    emit_signal(TOSIGNAL(Reader::signalNewLine), args);
+    emit_signal(TOSIGNAL(Reader::signalNewLine), input);
 }

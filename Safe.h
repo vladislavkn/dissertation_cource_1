@@ -14,15 +14,15 @@ public:
     int get_open_box_number();
     int getAllBoxesCount();
     
-    void handleSetSafeDimentions(Triple);
-    void handleSelectBox(Triple);
-    void handleOpenBox(Triple);
-    void handleCloseBox(Triple);
-    void handleAddBox(Triple);
-    void handleSetSafeState(Triple);
-    void handleResetSafe(Triple);
+    void handleSetSafeDimentions(vector<string>);
+    void handleSelectBox(vector<string>);
+    void handleOpenBox(vector<string>);
+    void handleCloseBox(vector<string>);
+    void handleAddBox(vector<string>);
+    void handleSetSafeState(vector<string>);
+    void handleResetSafe(vector<string>);
     
-    void signalSetBoxState(Triple&);
+    void signalSetBoxState(vector<string>&);
 private:
     int open_box_number = 0;
     SafeState safe_state = SafeState::Ready;

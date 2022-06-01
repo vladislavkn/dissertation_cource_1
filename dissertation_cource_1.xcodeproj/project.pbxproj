@@ -16,7 +16,6 @@
 		8453D48E283F8D77000B5176 /* Server.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8453D48D283F8D77000B5176 /* Server.cpp */; };
 		8453D490283F8D98000B5176 /* Object.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8453D48F283F8D98000B5176 /* Object.cpp */; };
 		847D622B2841547900499A58 /* Display.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 847D622A2841547900499A58 /* Display.cpp */; };
-		847D622F284276C500499A58 /* Triple.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 847D622E284276C500499A58 /* Triple.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -50,8 +49,6 @@
 		8470C3B5283F8E1700BCE09B /* Object.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Object.h; sourceTree = "<group>"; };
 		847D62282840D8DB00499A58 /* Display.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Display.h; sourceTree = "<group>"; };
 		847D622A2841547900499A58 /* Display.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Display.cpp; sourceTree = "<group>"; };
-		847D622D2842768200499A58 /* Triple.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Triple.h; sourceTree = "<group>"; };
-		847D622E284276C500499A58 /* Triple.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Triple.cpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -68,7 +65,6 @@
 		8453D470283F8C18000B5176 = {
 			isa = PBXGroup;
 			children = (
-				847D622C2842765900499A58 /* Triple */,
 				847D62272840D8B300499A58 /* Display */,
 				847D62262840D6D100499A58 /* Server */,
 				847D62252840D6B500499A58 /* Object */,
@@ -162,15 +158,6 @@
 			name = Display;
 			sourceTree = "<group>";
 		};
-		847D622C2842765900499A58 /* Triple */ = {
-			isa = PBXGroup;
-			children = (
-				847D622D2842768200499A58 /* Triple.h */,
-				847D622E284276C500499A58 /* Triple.cpp */,
-			);
-			name = Triple;
-			sourceTree = "<group>";
-		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -233,7 +220,6 @@
 				8453D490283F8D98000B5176 /* Object.cpp in Sources */,
 				8453D48E283F8D77000B5176 /* Server.cpp in Sources */,
 				8453D48A283F8D57000B5176 /* SafeBox.cpp in Sources */,
-				847D622F284276C500499A58 /* Triple.cpp in Sources */,
 				8453D486283F8D38000B5176 /* Safe.cpp in Sources */,
 				8453D47D283F8C18000B5176 /* main.cpp in Sources */,
 				8453D488283F8D4A000B5176 /* Reader.cpp in Sources */,

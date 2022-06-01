@@ -6,7 +6,7 @@
 class Display : public Object {
 public:
     Display(Object* parent, string name="display");
-    void handlePrint(Triple);
+    void handlePrint(vector<string>);
 };
 
 #endif

@@ -159,7 +159,7 @@ void Object::remove_connection(TYPE_SIGNAL signal, Object* target, TYPE_HANDLER 
     }
 }
 
-void Object::emit_signal(TYPE_SIGNAL signal, Triple payload) {
+void Object::emit_signal(TYPE_SIGNAL signal, vector<string> payload) {
     if(readiness == 0) return;
     (this->*signal)(payload);
     if(connections.empty()) return;

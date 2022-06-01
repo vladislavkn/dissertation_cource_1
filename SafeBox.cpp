@@ -12,10 +12,10 @@ int SafeBox::get_box_number() {
     return box_number;
 }
 
-void SafeBox::handleSetBoxState(Triple args) {
-    int box_number = stoi(args.first);
+void SafeBox::handleSetBoxState(vector<string> args) {
+    int box_number = stoi(args[0]);
     if(this->box_number == box_number) {
-        state = (SafeBoxState) stoi(args.second);
+        state = (SafeBoxState) stoi(args[1]);
     }
 }
 

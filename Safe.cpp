@@ -19,36 +19,36 @@ int Safe::getAllBoxesCount() {
     return n * m;
 }
 
-void Safe::handleSetSafeDimentions(Triple args) {
-    n = stoi(args.first);
-    m = stoi(args.second);
+void Safe::handleSetSafeDimentions(vector<string> args) {
+    n = stoi(args[0]);
+    m = stoi(args[1]);
 };
 
-void Safe::handleSelectBox(Triple args) {
-    open_box_number = stoi(args.first);
+void Safe::handleSelectBox(vector<string> args) {
+    open_box_number = stoi(args[0]);
     safe_state = WaitingClientKey;
 }
 
-void Safe::handleOpenBox(Triple args) {
-    emit_signal(TOSIGNAL(Safe::signalSetBoxState), Triple(to_string(open_box_number), to_string(SafeBox::SafeBoxState::Open)));
+void Safe::handleOpenBox(vector<string> args) {
+    emit_signal(TOSIGNAL(Safe::signalSetBoxState), {to_string(open_box_number), to_string(SafeBox::SafeBoxState::Open)});
 }
-void Safe::handleCloseBox(Triple args) {
-    emit_signal(TOSIGNAL(Safe::signalSetBoxState), Triple(args.first, to_string(SafeBox::SafeBoxState::Closed)));
+void Safe::handleCloseBox(vector<string> args) {
+        emit_signal(TOSIGNAL(Safe::signalSetBoxState), {args[0], to_string(SafeBox::SafeBoxState::Closed)});
 }
 
-void Safe::handleAddBox(Triple args) {
-    SafeBox* safeBox = new SafeBox(this, stoi(args.first), "Box" + args.first);
+void Safe::handleAddBox(vector<string> args) {
+    SafeBox* safeBox = new SafeBox(this, stoi(args[0]), "Box" + args[0]);
     set_connection(TOSIGNAL(Safe::signalSetBoxState), safeBox, TOHANDLER(SafeBox::handleSetBoxState));
     safeBox->set_readiness(1);
 }
 
-void Safe::handleSetSafeState(Triple args) {
-    safe_state = (SafeState) stoi(args.first);
+void Safe::handleSetSafeState(vector<string> args) {
+    safe_state = (SafeState) stoi(args[0]);
 }
 
-void Safe::handleResetSafe(Triple) {
+void Safe::handleResetSafe(vector<string>) {
     open_box_number = 0;
     safe_state = Ready;
 }
 
-void Safe::signalSetBoxState(Triple&) {}
+void Safe::signalSetBoxState(vector<string>&) {}

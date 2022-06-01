@@ -2,6 +2,6 @@
 
 Display::Display(Object* parent, string name) : Object(parent, name) {}
 
-void Display::handlePrint(Triple args) {
-    cout << args.first;
+void Display::handlePrint(vector<string> args) {
+    cout << args[0];
 }

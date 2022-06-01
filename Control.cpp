@@ -14,71 +14,72 @@ bool Control::isAllBoxesConfigured() {
     return configuredBoxesCount == allBoxesCount;
 }
 
-void Control::handleSetSafeDimentions(Triple args) {
+void Control::handleSetSafeDimentions(vector<string> args) {
     emit_signal(TOSIGNAL(Control::signalSetSafeDimentions), args);
 }
 
-void Control::handleSetBoxKeys(Triple args) {
-    emit_signal(TOSIGNAL(Control::signalAddBox), Triple(args.first));
+void Control::handleSetBoxKeys(vector<string> args) {
+    emit_signal(TOSIGNAL(Control::signalAddBox), { args[0] });
     emit_signal(TOSIGNAL(Control::signalSetBoxKeys), args);
 }
 
-void Control::handleSelectBox(Triple args) {
+void Control::handleSelectBox(vector<string> args) {
     Safe* safe = (Safe*) find_by_path("/control/safe");
-    if(safe->get_box_by_number(stoi(args.first))->get_box_state() == SafeBox::SafeBoxState::Closed) {
+    if(safe->get_box_by_number(stoi(args[0]))->get_box_state() == SafeBox::SafeBoxState::Closed) {
         emit_signal(TOSIGNAL(Control::signalSelectBox), args);
     } else {
-        emit_signal(TOSIGNAL(Control::signalError), Triple("\nThe safe deposit box is open", "11", "3"));
+        emit_signal(TOSIGNAL(Control::signalError), {"\nThe safe deposit box is open", "0", "3"});
     }
 }
 
-void Control::handleApplyClientKey(Triple args) {
-    string clientKey = args.first;
+void Control::handleApplyClientKey(vector<string> args) {
+    string clientKey = args[0];
     Server* server = (Server*) find_by_path("/control/server");
     Safe* safe = (Safe*) find_by_path("/control/safe");
     int openBoxNumber = safe->get_open_box_number();
     if(server->validateBoxClientkey(openBoxNumber, clientKey)) {
-        emit_signal(TOSIGNAL(Control::signaleSetSafeState), Triple(to_string(Safe::SafeState::WaitingBankKey)));
+        emit_signal(TOSIGNAL(Control::signaleSetSafeState), {to_string(Safe::SafeState::WaitingBankKey)});
     } else {
-        emit_signal(TOSIGNAL(Control::signalError), Triple("\nThe client is key is incorrect", "0", "4"));
+        emit_signal(TOSIGNAL(Control::signalError), {"\nThe client is key is incorrect", "0", "4"});
     }
 }
 
-void Control::handleApplyBankKey(Triple args) {
-    string bankKey = args.first;
+void Control::handleApplyBankKey(vector<string> args) {
+    string bankKey = args[0];
     Server* server = (Server*) find_by_path("/control/server");
     Safe* safe = (Safe*) find_by_path("/control/safe");
     int openBoxNumber = safe->get_open_box_number();
     if(server->validateBoxBankkey(openBoxNumber, bankKey)) {
-        emit_signal(TOSIGNAL(Control::signalOpenBox), Triple());
-        emit_signal(TOSIGNAL(Control::signalError), Triple("\nThe safe deposit box " + to_string(openBoxNumber) + " is open", "11", "3"));
+        emit_signal(TOSIGNAL(Control::signalOpenBox), {});
+        emit_signal(TOSIGNAL(Control::signalError), { "\nThe safe deposit box " + to_string(openBoxNumber) + " is open", "0", "3" });
+        
     } else {
-        emit_signal(TOSIGNAL(Control::signalError), Triple("\nThe bank is key is incorrect", "0", "5"));
+        emit_signal(TOSIGNAL(Control::signalError), {"\nThe bank is key is incorrect", "0", "5" });
     }
 }
 
-void Control::handleCloseBox(Triple args) {
+void Control::handleCloseBox(vector<string> args) {
     emit_signal(TOSIGNAL(Control::signalCloseBox), args);
 }
 
-void Control::handleResetSafe(Triple args) {
+void Control::handleResetSafe(vector<string> args) {
     emit_signal(TOSIGNAL(Control::signalResetSafe), args);
 }
 
-void Control::signalSetSafeDimentions(Triple &) {}
+void Control::signalSetSafeDimentions(vector<string> &) {}
 
-void Control::signaleSetSafeState(Triple&) {}
+void Control::signaleSetSafeState(vector<string>&) {}
 
-void Control::signalResetSafe(Triple&) {}
+void Control::signalResetSafe(vector<string>&) {}
 
-void Control::signalSelectBox(Triple&) {};
+void Control::signalSelectBox(vector<string>&) {};
 
-void Control::signalOpenBox(Triple&) {};
+void Control::signalOpenBox(vector<string>&) {};
 
-void Control::signalCloseBox(Triple&) {};
+void Control::signalCloseBox(vector<string>&) {};
 
-void Control::signalSetBoxKeys(Triple&) {};
+void Control::signalSetBoxKeys(vector<string>&) {};
 
-void Control::signalError(Triple&) {};
+void Control::signalError(vector<string>&) {};
 
-void Control::signalAddBox(Triple&) {};
+void Control::signalAddBox(vector<string>&) {};
